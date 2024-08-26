@@ -1,0 +1,43 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  td, th {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  tr.selected {
+    background-color: #e0e0e0;
+  }
+  
+  .pagination-controls {
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  button {
+    margin: 5px;
+    padding: 5px 10px;
+  }
+  
+  .delete-selected {
+    margin-top: 20px;
+    background-color: #ff4d4d;
+    color: white;
+  }
+  
+  .search-input {
+    margin-bottom: 20px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  

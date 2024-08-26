@@ -1,0 +1,60 @@
+<div class="admin-ui">
+  <div class="search-filter-container" style="display: flex; align-items: center; margin-bottom: 20px;">
+    <input
+      type="text"
+      (input)="onSearchChange($event)"
+      placeholder="Search by name or email"
+      style="margin-right: 10px; padding: 5px;"
+    />
+    <select (change)="onFilterChange($event)" style="padding: 5px;">
+      <option value="">Filter by Role</option>
+      <option value="Admin">Admin</option>
+      <option value="Member">Member</option>
+    </select>
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th><input type="checkbox" (change)="selectAllCurrentPage()" [checked]="isAllSelected()" /></th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of paginatedUsers">
+        <td><input type="checkbox" [checked]="selectedUsers.has(user.id)" (change)="selectUser(user.id)" /></td>
+        <td>{{ user.id }}</td>
+        <td *ngIf="!user.isEditing">{{ user.name || 'N/A' }}</td>
+        <td *ngIf="user.isEditing"><input [(ngModel)]="user.name" /></td>
+        <td *ngIf="!user.isEditing">{{ user.email || 'N/A' }}</td>
+        <td *ngIf="user.isEditing"><input [(ngModel)]="user.email" /></td>
+        <td>{{ user.role || 'N/A' }}</td>
+        <td>
+          <button *ngIf="!user.isEditing" (click)="editUser(user)">Edit</button>
+          <button *ngIf="user.isEditing" (click)="saveUser(user)">Save</button>
+          <button (click)="deleteUser(user.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>  
+
+  <div class="pagination-controls">
+    <button (click)="changePage(1)" class="first-page">First</button>
+    <button (click)="changePage(currentPage - 1)" class="previous-page" [disabled]="currentPage === 1">Previous</button>
+    <button
+      *ngFor="let page of getPages(); let i = index"
+      (click)="changePage(i + 1)"
+      [class.active]="currentPage === i + 1"
+    >
+      {{ i + 1 }}
+    </button>
+    <button (click)="changePage(currentPage + 1)" class="next-page" [disabled]="currentPage === getTotalPages()">Next</button>
+    <button (click)="changePage(getTotalPages())" class="last-page">Last</button>
+  </div>
+
+  <button (click)="deleteSelected()" class="delete-selected">Delete Selected</button>
+</div>
