@@ -3,12 +3,14 @@
     "builds": [
       {
         "src": "angular.json",
-        "use": "@vercel/static-build",
-        "config": { "distDir": "dist/Admin_Dashboard" }
+        "use": "@vercel/angular"
       }
     ],
     "routes": [
-      { "src": "/(.*)", "dest": "/" }
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
     ]
   }
   
